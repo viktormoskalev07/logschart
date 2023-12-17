@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>usdt to uah</title>
+  </head>
+  <body>
+    <div style="width: 4200px  ; height:800px">
+      <h1>
+        match history
+      </h1>
+
+
+      <a href="/log.json"> full log from 17.12.23</a>
+      <canvas id="myChart"></canvas>
+    </div>
+    <script>
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      const createChart = async () => {
+
+        const _data = await fetch("log.json");
+        const data = await _data.json();
+
+        const adv = data.arr.map((item) => {
+
+          return item.data.count;
+        });
+
+        const time = data.arr.map((item) => {
+          const iso = new Date(item.time);
+          return (
+            iso.getHours() +
+            ":00  , " +
+            iso.getDate() +
+            "." +
+            (iso.getMonth() + 1)
+          );
+        });
+        const colors = adv.map((item) => {
+          let ammount = 255;
+          try {
+            ammount =255- item*10
+          } catch {}
+          const green = item*10
+          return `rgb( ${ammount},   ${green} , 4)`;
+        });
+        console.log(colors)
+        const ctx = document.getElementById("myChart");
+
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: time,
+            datasets: [
+              {
+                label:
+                  "крсный цвет -ниже онлайн",
+                data: adv,
+                borderWidth: 1,
+                backgroundColor: colors,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                suggestedMin: 0,
+                suggestedMax: 21,
+                beginAtZero: false,
+              },
+            },
+          },
+        });
+      };
+      createChart();
+    </script>
+  </body>
+</html>
