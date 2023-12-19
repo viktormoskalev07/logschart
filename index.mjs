@@ -1,6 +1,19 @@
+import axios from "axios";
 import fetch from "node-fetch";
 import fs from "fs";
-import {sendToTelegram} from "./helpers.js";
+
+const BOT_TOKEN = "6706934976:AAGrz5Z78fu7JMjiihN7H60bX7nfBsTWm2M";
+const CHAT_ID = "-1002043998874";
+const sendToTelegram = (error) => {
+  axios
+    .post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      chat_id: CHAT_ID,
+      text: JSON.stringify(error),
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
 
 const receiveData = async () => {
   try {
