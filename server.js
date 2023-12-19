@@ -17,41 +17,30 @@ const sendToTelegram = (error) => {
 };
 
 const server = http.createServer((req, res) => {
-  try {
-    if (req.url === '/') {
-      // Отдаем index.html
+  if (req.url === '/') {
+    try {
       fs.readFile(path.join(__dirname, '/', 'index.html'), (err, content) => {
-        if (err) {
-          res.writeHead(500, {'Content-Type': 'text/plain'});
-          res.end('Internal Server Error');
-          console.error('Error reading index.html:', err);
-          sendToTelegram(`Error reading index.html: ${err}`)
-          return;
-        }
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.end(content);
       });
-    } else if (req.url === '/log.json') {
-      // Отдаем log.json
+    } catch (err) {
+      res.writeHead(500, {'Content-Type': 'text/plain'});
+      res.end('Internal Server Error');
+      console.error('Error reading index.html:', err);
+      sendToTelegram(`Error reading index.html: ${err}`)
+    }
+  } else if (req.url === '/log.json') {
+    try {
       fs.readFile(path.join(__dirname, '/', 'log.json'), (err, content) => {
-        if (err) {
-          res.writeHead(500, {'Content-Type': 'text/plain'});
-          res.end('Internal Server Error');
-          console.error('Error reading log.json:', err);
-          sendToTelegram(`Error reading log.json: ${err}`)
-          return;
-        }
         res.writeHead(200, {'Content-Type': 'application/json'});
         res.end(content);
       });
-    } else {
-      res.writeHead(404, {'Content-Type': 'text/plain'});
-      res.end('Not Found');
-      console.error('Error reading index.html');
-      sendToTelegram('Error reading index.html')
+    } catch (err) {
+      res.writeHead(500, {'Content-Type': 'text/plain'});
+      res.end('Internal Server Error');
+      console.error('Error reading log.json:', err);
+      sendToTelegram(`Error reading log.json: ${err}`)
     }
-  } catch (error) {
-    console.error('Error handling request:', error);
   }
 });
 
