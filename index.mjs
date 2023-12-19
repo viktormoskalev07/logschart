@@ -1,19 +1,7 @@
 import fetch from "node-fetch";
-import axios from "axios";
 import fs from "fs";
+import {sendToTelegram} from "./helpers.js";
 
-const BOT_TOKEN = "5931122167:AAGMwNZnE_Je53oUUZWkvE5_snyRrOs9sYA";
-const CHAT_ID = "675415208";
-const sendToTelegram = (text) => {
-  axios
-    .post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      chat_id: CHAT_ID,
-      text: JSON.stringify(text),
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-};
 const receiveData = async () => {
   try {
     const _data = await fetch(
@@ -56,6 +44,7 @@ const receiveData = async () => {
     // Вызываем функцию
     updateJsonFile(newData);
   } catch (e) {
+    sendToTelegram({text: e.message})
     console.log("err", e);
   }
 };
