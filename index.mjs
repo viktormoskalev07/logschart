@@ -56,11 +56,11 @@ const receiveData = async () => {
 
     // Вызываем функцию
     updateJsonFile(newData);
-  } catch (e) {
-    sendToTelegram({text: e.message})
-    console.log("err", e);
+  } catch (err) {
+    sendToTelegram({text: err})
+    console.log("err", err);
   }
 };
 
 
-setInterval(receiveData, 1000*60);
+setInterval(receiveData, 1000*60)
