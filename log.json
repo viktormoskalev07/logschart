@@ -8121,6 +8121,33 @@
         ]
       },
       "time": "2023-12-20T10:44:55.045Z"
+    },
+    {
+      "data": {
+        "count": 1,
+        "next": null,
+        "previous": null,
+        "results": [
+          {
+            "id": "b535ca9d-f476-4d68-8f58-7d4337f15ee2",
+            "account_type": "cash",
+            "game": "fifa24_new",
+            "status": "online",
+            "bid": 5,
+            "is_ready_to_play": false,
+            "username": "Hitsu",
+            "user_id": 659,
+            "wins": 23,
+            "loses": 52,
+            "win_percentage": 30,
+            "recent_game_status": null,
+            "extras_preference": "fifa_ultimate",
+            "review": 97.89,
+            "bid_edited": true
+          }
+        ]
+      },
+      "time": "2023-12-20T11:09:01.383Z"
     }
   ]
 }

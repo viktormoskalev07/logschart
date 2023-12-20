@@ -1,7 +1,11 @@
 import axios from "axios";
 import fetch from "node-fetch";
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import fs from "fs";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const BOT_TOKEN = "6706934976:AAGrz5Z78fu7JMjiihN7H60bX7nfBsTWm2M";
 const CHAT_ID = "-1002043998874";
