@@ -28,7 +28,7 @@ const server = http.createServer((req, res) => {
   } else if (req.url === '/log.json') {
     readFileAndRespond(res, 'log.json', 'application/json').then()
   } else {
-    notFoundResponse(res).then()
+    notFoundResponse(res);
   }
 });
 
@@ -42,18 +42,18 @@ const readFileAndRespond = async (res, fileName, contentType) => {
   }
 };
 
-const notFoundResponse = async (res) => {
-  await res.writeHead(404, { 'Content-Type': 'text/plain' });
+const notFoundResponse = (res) => {
+  res.writeHead(404, { 'Content-Type': 'text/plain' });
   res.end('Not Found');
   console.error('Resource not found');
   sendToTelegram('Resource not found');
 };
 
-const internalServerError = async (res, errorMessage) => {
-  await res.writeHead(500, { 'Content-Type': 'text/plain' });
+const internalServerError = (res, err) => {
+  res.writeHead(500, { 'Content-Type': 'text/plain' });
   res.end('Internal Server Error');
-  console.error(errorMessage);
-  sendToTelegram(errorMessage);
+  console.error(err);
+  sendToTelegram('Internal Server Error', err);
 };
 
 const PORT = 3015;

@@ -1,5 +1,6 @@
 import axios from "axios";
 import fetch from "node-fetch";
+import path from 'path';
 import fs from "fs";
 
 const BOT_TOKEN = "6706934976:AAGrz5Z78fu7JMjiihN7H60bX7nfBsTWm2M";
