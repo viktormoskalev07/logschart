@@ -24,11 +24,11 @@ const receiveData = async () => {
     console.log(data)
 
 
-    const file = "log.json"; // Замените на путь к вашему файлу
+    const file = path.join(__dirname, 'log.json')
 
     // Функция для чтения и обновления JSON-файла
-    function updateJsonFile(dataToAdd) {
-      fs.readFile(file, (err, data) => {
+    async function updateJsonFile(dataToAdd) {
+      await fs.readFile(file, (err, data) => {
         if (err) throw err;
         let jsonData = JSON.parse(data);
 
@@ -55,7 +55,7 @@ const receiveData = async () => {
     };
 
     // Вызываем функцию
-    updateJsonFile(newData);
+    updateJsonFile(newData).then();
   } catch (err) {
     sendToTelegram({text: err})
     console.log("err", err);
