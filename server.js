@@ -46,7 +46,6 @@ const notFoundResponse = (res) => {
   res.writeHead(404, { 'Content-Type': 'text/plain' });
   res.end('Not Found');
   console.error('Resource not found');
-  sendToTelegram('Resource not found');
 };
 
 const internalServerError = (res, err) => {
